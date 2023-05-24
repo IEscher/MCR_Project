@@ -10,7 +10,7 @@
  * 
  */
 UCLASS()
-class MCR_PROJECT_API UShovelTool : public UTool
+class MCR_PROJECT_API AShovelTool : public ATool
 {
 	GENERATED_BODY()
 

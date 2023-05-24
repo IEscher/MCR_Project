@@ -4,18 +4,18 @@
 #include "Tool.h"
 
 // Sets default values for this component's properties
-UTool::UTool()
+ATool::ATool()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = true;
 
 	// ...
 }
 
 
 // Called when the game starts
-void UTool::BeginPlay()
+void ATool::BeginPlay()
 {
 	Super::BeginPlay();
 
@@ -23,16 +23,12 @@ void UTool::BeginPlay()
 	
 }
 
-
-// Called every frame
-void UTool::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+void ATool::Tick(float DeltaTime)
 {
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	// ...
+	Super::Tick(DeltaTime);
 }
 
-int UTool::GetMiningLevel()
+int ATool::GetMiningLevel()
 {
 	return 0;
 }

@@ -17,14 +17,25 @@ public:
 	// Sets default values for this character's properties
 	AMinerCharacter();
 
+	void SetTool(TSubclassOf<ATool> Tool);
+
+	UFUNCTION(BlueprintCallable)
+	TSubclassOf<ATool> GetTool() const;
+
 protected:
 
 	/** Tool component */
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	class UTool* Tool;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<ATool> ToolComponent;
 	
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void EquipTool();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void UnEquipTool();
 
 public:	
 	// Called every frame

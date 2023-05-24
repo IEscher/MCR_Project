@@ -27,9 +27,9 @@ public:
 
 	// EMaterialType getMaterialType();
 
-	virtual void Mine(const UTool& Tool);
+	virtual void Mine(const ATool& Tool);
 
-	virtual bool bCouldMine(const UTool& Tool);
+	virtual bool bCouldMine(const ATool& Tool);
 
 protected:
 	// Called when the game starts or when spawned

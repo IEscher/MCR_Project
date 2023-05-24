@@ -15,9 +15,9 @@ class MCR_PROJECT_API AStoneBlock : public ABlock
 	GENERATED_BODY()
 
 public:
-	void Mine(const UTool& Tool) override;
+	void Mine(const ATool& Tool) override;
 
-	bool bCouldMine(const UTool& Tool) override;
+	bool bCouldMine(const ATool& Tool) override;
 
 private:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))

@@ -8,10 +8,6 @@ AMinerCharacter::AMinerCharacter()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	
-	// Create a inventory component
-	// Tool = CreateDefaultSubobject<UTool>(TEXT("Tool"));
-	// AddOwnedComponent(Tool);
 
 }
 
@@ -19,7 +15,7 @@ AMinerCharacter::AMinerCharacter()
 void AMinerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	EquipTool();
 }
 
 // Called every frame
@@ -34,5 +30,17 @@ void AMinerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+}
+
+void AMinerCharacter::SetTool(TSubclassOf<ATool> Tool)
+{
+	UnEquipTool();
+	ToolComponent = Tool;
+	EquipTool();
+}
+
+TSubclassOf<ATool> AMinerCharacter::GetTool() const
+{
+	return ToolComponent;
 }
 

@@ -3,7 +3,7 @@
 
 #include "ShovelTool.h"
 
-int UShovelTool::GetMiningLevel()
+int AShovelTool::GetMiningLevel()
 {
 	return 0;
 }

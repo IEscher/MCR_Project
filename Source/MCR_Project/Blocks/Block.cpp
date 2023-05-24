@@ -24,11 +24,11 @@ void ABlock::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-void ABlock::Mine(const UTool& Tool)
+void ABlock::Mine(const ATool& Tool)
 {
 }
 
-bool ABlock::bCouldMine(const UTool& Tool)
+bool ABlock::bCouldMine(const ATool& Tool)
 {
 	return false;
 }

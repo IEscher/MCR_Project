@@ -3,12 +3,12 @@
 
 #include "StoneBlock.h"
 
-void AStoneBlock::Mine(const UTool& Tool)
+void AStoneBlock::Mine(const ATool& Tool)
 {
 	
 }
 
-bool AStoneBlock::bCouldMine(const UTool& Tool)
+bool AStoneBlock::bCouldMine(const ATool& Tool)
 {
 	return false;
 }

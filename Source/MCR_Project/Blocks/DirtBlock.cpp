@@ -3,12 +3,12 @@
 
 #include "DirtBlock.h"
 
-void ADirtBlock::Mine(const UTool& Tool)
+void ADirtBlock::Mine(const ATool& Tool)
 {
 	
 }
 
-bool ADirtBlock::bCouldMine(const UTool& Tool)
+bool ADirtBlock::bCouldMine(const ATool& Tool)
 {
 	return false;
 }

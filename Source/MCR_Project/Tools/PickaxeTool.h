@@ -10,7 +10,7 @@
  * 
  */
 UCLASS()
-class MCR_PROJECT_API UPickaxeTool : public UTool
+class MCR_PROJECT_API APickaxeTool : public ATool
 {
 	GENERATED_BODY()
 

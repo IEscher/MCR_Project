@@ -3,18 +3,18 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Components/StaticMeshComponent.h"
+#include "Engine/StaticMeshActor.h"
 #include "Tool.generated.h"
 
 
-UCLASS( Abstract, ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class MCR_PROJECT_API UTool : public UStaticMeshComponent 
+UCLASS( Abstract )
+class MCR_PROJECT_API ATool : public AStaticMeshActor
 {
 	GENERATED_BODY()
 
 public:	
 	// Sets default values for this component's properties
-	UTool();
+	ATool();
 
 protected:
 	// Called when the game starts
@@ -22,7 +22,9 @@ protected:
 
 public:	
 	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	virtual void Tick(float DeltaTime) override;
+
+	
 
 	virtual int GetMiningLevel();
 		
