@@ -5,11 +5,12 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "../Tools/Tool.h"
+#include "ControllableCharacter.h"
 
 #include "MinerCharacter.generated.h"
 
 UCLASS()
-class MCR_PROJECT_API AMinerCharacter : public ACharacter
+class MCR_PROJECT_API AMinerCharacter : public AControllableCharacter
 {
 	GENERATED_BODY()
 
@@ -31,11 +32,22 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	void GoToBlock();
+
 	UFUNCTION(BlueprintImplementableEvent)
 	void EquipTool();
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void UnEquipTool();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void GoToActor(AActor* Actor);
+
+	UFUNCTION(BlueprintCallable)
+	void ArrivedToPlace(AVisitablePlace* Place) override;
+
+	UFUNCTION(BlueprintPure)
+	ATool* GetToolActor();
 
 public:	
 	// Called every frame

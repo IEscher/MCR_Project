@@ -18,6 +18,6 @@ public:
 	int GetMiningLevel() override;
 	
 private:
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	uint8 MiningLevel;
 };
