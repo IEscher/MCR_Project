@@ -3,12 +3,7 @@
 
 #include "DirtBlock.h"
 
-void ADirtBlock::Mine(const ATool& Tool)
+bool ADirtBlock::bCouldMine(const ATool& Tool) const
 {
-	
-}
-
-bool ADirtBlock::bCouldMine(const ATool& Tool)
-{
-	return false;
+	return true;
 }

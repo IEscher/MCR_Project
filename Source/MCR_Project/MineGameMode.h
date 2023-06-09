@@ -20,6 +20,8 @@ class MCR_PROJECT_API AMineGameMode : public AGameModeBase
 public:
 	ABlock* FindClosestBlock(const FVector StartingLocation) const;
 
+	void RemoveBlockFromList(const ABlock& Block);
+
 // protected:
 // 	virtual void BeginPlay() override;
 

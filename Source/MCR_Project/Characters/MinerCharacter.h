@@ -32,6 +32,7 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UFUNCTION(BlueprintCallable)
 	void GoToBlock();
 
 	UFUNCTION(BlueprintImplementableEvent)
@@ -46,8 +47,9 @@ protected:
 	UFUNCTION(BlueprintCallable)
 	void ArrivedToPlace(AVisitablePlace* Place) override;
 
-	UFUNCTION(BlueprintPure)
+	UFUNCTION(BlueprintNativeEvent)
 	ATool* GetToolActor();
+	ATool* GetToolActor_Implementation();
 
 public:	
 	// Called every frame

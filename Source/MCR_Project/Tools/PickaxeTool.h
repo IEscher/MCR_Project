@@ -15,9 +15,9 @@ class MCR_PROJECT_API APickaxeTool : public ATool
 	GENERATED_BODY()
 
 public:
-	int GetMiningLevel() override;
+	int GetMiningLevel() const;
 	
 private:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	uint8 MiningLevel;
 };

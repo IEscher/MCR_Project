@@ -28,8 +28,3 @@ void ATool::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-int ATool::GetMiningLevel()
-{
-	return 0;
-}
-

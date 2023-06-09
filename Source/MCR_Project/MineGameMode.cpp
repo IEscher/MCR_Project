@@ -29,6 +29,49 @@ ABlock* AMineGameMode::FindClosestBlock(
 	return Result;
 }
 
+void AMineGameMode::RemoveBlockFromList(const ABlock& Block)
+{
+	UE_LOG(LogTemp, Warning, TEXT("RemoveBlockFromList"));
+	
+	// for (auto Iterator = Places.begin(); Iterator != Places.end(); Iterator.operator++())
+	// {
+	// 	ABlock* ListBlock = Cast<ABlock>(*Iterator);
+	// 	if (ListBlock && ListBlock->GetUniqueID() == Block.GetUniqueID())
+	// 	{
+	// 		UE_LOG(LogTemp, Warning, TEXT("Block should be removed from array"));
+	// 		Places.Remove(reinterpret_cast<TArray<AVisitablePlace*>::ElementType&>(Iterator));
+	// 	}
+	// }
+
+	// for (auto Iter = Places.CreateIterator(); Iter; ++Iter)
+	// {
+	// 	ABlock* ListBlock = Cast<ABlock>(Places.inde(Iter.GetIndex()));
+	// 	if (ListBlock && ListBlock->GetUniqueID() == Block.GetUniqueID())
+	// 	{
+	// 		UE_LOG(LogTemp, Warning, TEXT("Block should be removed from array"));
+	// 		Places.Remove(reinterpret_cast<TArray<AVisitablePlace*>::ElementType&>(Iterator));
+	// 	}
+	// }
+	
+	// for (int32 Index = 0; Index != Places.Num(); ++Index)
+	// {
+	// 	ABlock* ListBlock = Cast<ABlock>(Places[Index]);
+	// 	if (ListBlock && ListBlock->GetUniqueID() == Block.GetUniqueID())
+	// 	{
+	// 		UE_LOG(LogTemp, Warning, TEXT("Block should be removed from array"));
+	// 		Places.RemoveAtSwap(Index);
+	// 	}
+	// }
+	
+	int32 IndexToRemove = Places.IndexOfByKey(&Block);
+	if (IndexToRemove != INDEX_NONE)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Block should be removed from array"));
+		// Swap the element to remove with the last element in the array
+		Places.RemoveAtSwap(IndexToRemove);
+	} 
+}
+
 void AMineGameMode::FindAllActors()
 {
 	TArray<AActor*> FoundActors;

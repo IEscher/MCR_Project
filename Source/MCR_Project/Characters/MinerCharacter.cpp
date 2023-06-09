@@ -26,16 +26,8 @@ void AMinerCharacter::GoToBlock()
 	AMineGameMode* GameMode = Cast<AMineGameMode>(GetWorld()->GetAuthGameMode());
 	if (GameMode)
 	{
-		// UE_LOG(LogTemp, Warning, TEXT("Should not be moving"));
 		ABlock* Block = GameMode->FindClosestBlock(GetActorLocation());
-		// UE_LOG(LogTemp, Warning, TEXT("Should be moving"));
 		GoToActor(Block);
-		// AAIController* Cont = Cast<AAIController>(this->GetController());
-		// if(Cont)
-		// {
-		// 	Cont->MoveToActor(Block);
-		// 	UE_LOG(LogTemp, Warning, TEXT("Should be moving"));
-		// }
 	}
 }
 
@@ -45,10 +37,25 @@ void AMinerCharacter::ArrivedToPlace(AVisitablePlace* Place)
 	UE_LOG(LogTemp, Warning, TEXT("AMinerCharacter arrived to place"));
 
 	ABlock* Block = Cast<ABlock>(Place);
-	if (Block)
+	ATool* Tool = GetToolActor();
+	if (Block && Tool)
 	{
-		Block->Mine(*GetToolActor());
+		Block->Mine(*Tool);
 	}
+
+	GoToBlock();
+
+	// ATool* ToolActor = GetToolActor();
+	// if (ToolActor)
+	// {
+	// 	UE_LOG(LogTemp, Log, TEXT("ToolActor found: %s"), *ToolActor->GetName());
+	// }
+}
+
+ATool* AMinerCharacter::GetToolActor_Implementation()
+{
+	UE_LOG(LogTemp, Warning, TEXT("AMinerCharacter: GetToolActor, no implementation found"));
+	return nullptr;
 }
 
 // Called every frame

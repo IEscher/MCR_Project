@@ -20,7 +20,7 @@ void AControllableCharacter::BeginPlay()
 
 void AControllableCharacter::ArrivedToPlace(AVisitablePlace* Place)
 {
-	UE_LOG(LogTemp, Warning, TEXT("ControllableCharacter arrived to place"));
+	// UE_LOG(LogTemp, Warning, TEXT("ControllableCharacter arrived to place"));
 }
 
 // Called every frame

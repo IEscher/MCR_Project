@@ -2,14 +2,20 @@
 
 
 #include "StoneBlock.h"
+#include "../Tools/PickaxeTool.h"
 
-void AStoneBlock::Mine(const ATool& Tool)
+bool AStoneBlock::bCouldMine(const ATool& Tool) const
 {
-	
-}
+	// auto ToolPtr = Ptr<ATool>(Tool);
+	const APickaxeTool* Pick = Cast<const APickaxeTool>(&Tool);
+	if(Pick)
+	UE_LOG(LogTemp, Warning, TEXT("Pick found, getML %d >= requiredML %d"), Pick->GetMiningLevel(), RequiredMiningLevel);
+	if (Pick && Pick->GetMiningLevel() >= RequiredMiningLevel)
+	{
+		return true;
+	}
 
-bool AStoneBlock::bCouldMine(const ATool& Tool)
-{
+	// const APickaxeTool& Pick = Tool;
 	return false;
 }
 

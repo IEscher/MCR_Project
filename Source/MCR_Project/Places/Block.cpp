@@ -3,6 +3,8 @@
 
 #include "Block.h"
 
+#include "../MineGameMode.h"
+
 // Sets default values
 ABlock::ABlock()
 {
@@ -26,11 +28,24 @@ void ABlock::Tick(float DeltaTime)
 
 void ABlock::Mine(const ATool& Tool)
 {
-	// TODO notify gamemode to delete in array
+	//check if could mine
+	if (bCouldMine(Tool))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("%s will be mined"), *this->GetName());
+		// if true
+		// notify gamemode to delete in array
+		AMineGameMode* GameMode = Cast<AMineGameMode>(GetWorld()->GetAuthGameMode());
+		GameMode->RemoveBlockFromList(*this);
+		// destroy object
+		Destroy();
+	}
+	// else
+	// Handler
 }
 
-bool ABlock::bCouldMine(const ATool& Tool)
+bool ABlock::bCouldMine(const ATool& Tool) const
 {
+	UE_LOG(LogTemp, Warning, TEXT("An abstract block can not be mined"));
 	return false;
 }
 

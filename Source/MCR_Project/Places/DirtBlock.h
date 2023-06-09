@@ -15,8 +15,6 @@ class MCR_PROJECT_API ADirtBlock : public ABlock
 	GENERATED_BODY()
 
 public:
-	void Mine(const ATool& Tool) override;
-
-	bool bCouldMine(const ATool& Tool) override;
+	bool bCouldMine(const ATool& Tool) const override;
 	
 };

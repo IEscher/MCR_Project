@@ -36,8 +36,8 @@ public:
 
 	// EMaterialType getMaterialType();
 
-	virtual void Mine(const ATool& Tool);
+	void Mine(const ATool& Tool);
 
-	virtual bool bCouldMine(const ATool& Tool);
+	virtual bool bCouldMine(const ATool& Tool) const;
 
 };

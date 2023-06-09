@@ -15,12 +15,10 @@ class MCR_PROJECT_API AStoneBlock : public ABlock
 	GENERATED_BODY()
 
 public:
-	void Mine(const ATool& Tool) override;
-
-	bool bCouldMine(const ATool& Tool) override;
+	bool bCouldMine(const ATool& Tool) const override;
 
 private:
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	uint8 RequiredMiningLevel;
 	
 };

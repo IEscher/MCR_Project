@@ -4,7 +4,7 @@
 #include "PickaxeTool.h"
 
 
-int APickaxeTool::GetMiningLevel()
+int APickaxeTool::GetMiningLevel() const
 {
 	return MiningLevel;
 }
