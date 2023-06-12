@@ -5,13 +5,32 @@
 
 UAbstractMinerHandler::UAbstractMinerHandler() = default;
 
-UAbstractMinerHandler *UAbstractMinerHandler::setNext(UAbstractMinerHandler *handler) {
-	this->next_handler = handler;
-	return handler;
+// void UAbstractMinerHandler::SetOwner(TObjectPtr<AMinerCharacter> _Owner)
+// {
+// 	if (_Owner)
+// 	{
+// 		Owner = _Owner;
+// 	}
+// }
+//
+// TObjectPtr<AMinerCharacter> UAbstractMinerHandler::GetOwner() const
+// {
+// 	return Owner;
+// }
+
+UAbstractMinerHandler *UAbstractMinerHandler::SetNext(UAbstractMinerHandler *Handler) {
+	this->next_handler = Handler;
+	return Handler;
 }
 
-void UAbstractMinerHandler::handle(UMiningRequest *request) {
+void UAbstractMinerHandler::Handle(UMiningRequest *Request) {
+	// if (this->next_handler) {
+	// 	return this->next_handler->Handle(Request);
+	// }
+}
+
+void UAbstractMinerHandler::ForwardRequest(UMiningRequest *Request) {
 	if (this->next_handler) {
-		return this->next_handler->handle(request);
+		return this->next_handler->Handle(Request);
 	}
 }

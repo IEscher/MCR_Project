@@ -18,5 +18,5 @@ class MCR_PROJECT_API USellHandler : public UAbstractProcessingHandler
 	
 public:
 	USellHandler() = default;
-	void handle(UProcessingRequest *request) override;
+	void Handle(UProcessingRequest *Request) override;
 };

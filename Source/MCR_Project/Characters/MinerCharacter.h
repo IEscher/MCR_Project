@@ -6,6 +6,9 @@
 #include "GameFramework/Character.h"
 #include "../Tools/Tool.h"
 #include "ControllableCharacter.h"
+// #include "../COR/MiningHandlers/AbstractMinerHandler.h"
+#include "../COR/MiningHandlers/MinerHandler.h"
+#include "../COR/Requests/MiningRequest.h"
 
 #include "MinerCharacter.generated.h"
 
@@ -13,6 +16,7 @@ UCLASS()
 class MCR_PROJECT_API AMinerCharacter : public AControllableCharacter
 {
 	GENERATED_BODY()
+	friend UMinerHandler;
 
 public:
 	// Sets default values for this character's properties
@@ -23,17 +27,25 @@ public:
 	UFUNCTION(BlueprintCallable)
 	TSubclassOf<ATool> GetTool() const;
 
+	TObjectPtr<UMinerHandler> GetHandler();
+
 protected:
 
 	/** Tool component */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "COR", meta = (AllowPrivateAccess = "true"))
 	TSubclassOf<ATool> ToolComponent;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "COR", meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<AMinerCharacter> Next_HandlerCharacter;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "COR", meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UMinerHandler> Handler;
 	
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UFUNCTION(BlueprintCallable)
-	void GoToBlock();
+	// UFUNCTION(BlueprintCallable)
+	// void GoToBlock(UMiningRequest* Request);
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void EquipTool();
@@ -42,10 +54,10 @@ protected:
 	void UnEquipTool();
 
 	UFUNCTION(BlueprintImplementableEvent)
-	void GoToActor(AActor* Actor);
+	void GoBakToStart();
 
 	UFUNCTION(BlueprintCallable)
-	void ArrivedToPlace(AVisitablePlace* Place) override;
+	void ArrivedToPlace(UMiningRequest* Request, AVisitablePlace* Place, bool bIsSuccessful) override;
 
 	UFUNCTION(BlueprintNativeEvent)
 	ATool* GetToolActor();
@@ -58,4 +70,6 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+private:
+	void InstantiateCOR();
 };

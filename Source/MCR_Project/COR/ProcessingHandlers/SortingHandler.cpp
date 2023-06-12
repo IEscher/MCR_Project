@@ -3,14 +3,14 @@
 
 #include "SortingHandler.h"
 
-void USortingHandler::handle(UProcessingRequest *r) {
+void USortingHandler::Handle(UProcessingRequest *Request) {
 
 	bool isTrash = false;
 	if(isTrash){
 		//TODO put material in trash
 	}else {
 		//Call next handler
-		Super::handle(r);
+		Super::Handle(Request);
 	}
 
 

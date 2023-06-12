@@ -18,5 +18,5 @@ class MCR_PROJECT_API UTransportHandler : public UAbstractProcessingHandler
 	
 public:
 	UTransportHandler() = default;
-	void handle(UProcessingRequest *request) override;
+	void Handle(UProcessingRequest *Request) override;
 };

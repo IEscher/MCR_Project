@@ -18,5 +18,6 @@ class MCR_PROJECT_API UMinerHandler : public UAbstractMinerHandler
 	
 public:
 	UMinerHandler() = default;
-	void handle(UMiningRequest *request) override;
+	void Handle(UMiningRequest *Request) override;
+	void ForwardRequest(UMiningRequest *Request) override;
 };

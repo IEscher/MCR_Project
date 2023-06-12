@@ -3,9 +3,9 @@
 
 #include "TransportHandler.h"
 
-void UTransportHandler::handle(UProcessingRequest *r) {
+void UTransportHandler::Handle(UProcessingRequest *Request) {
 
 	//TODO Transport the material
 	//Call next handler
-	Super::handle(r);
+	Super::Handle(Request);
 }

@@ -20,15 +20,22 @@ class MCR_PROJECT_API UAbstractProcessingHandler : public UObject
 public:
 	UAbstractProcessingHandler();
 
+	void SetOwner(TObjectPtr<class AProcessingCharacter> _Owner);
+	
+	TObjectPtr<class AProcessingCharacter> GetOwner() const;
+
 	/**
 	 * Set the next handler of a specified handler
-	 * @param handler
+	 * @param Handler
 	 * @return return a handler so we can use it like this handlerA->setNext
 	 * (handlerB)->setNext(handlerC);
 	 */
-	UAbstractProcessingHandler *setNext(UAbstractProcessingHandler *handler);
-	virtual void handle(UProcessingRequest *request);
+	UAbstractProcessingHandler *SetNext(UAbstractProcessingHandler *Handler);
+	virtual void Handle(UProcessingRequest *Request);
 	~UAbstractProcessingHandler() = default;
-private:
+	
+protected:
 	UAbstractProcessingHandler* next_handler = nullptr;
+
+	TObjectPtr<class AProcessingCharacter> Owner;
 };

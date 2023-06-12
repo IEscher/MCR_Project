@@ -18,5 +18,5 @@ class MCR_PROJECT_API UMakeToolsHandler : public UAbstractProcessingHandler
 	
 public:
 	UMakeToolsHandler() = default;
-	void handle(UProcessingRequest *request) override;
+	void Handle(UProcessingRequest *Request) override;
 };

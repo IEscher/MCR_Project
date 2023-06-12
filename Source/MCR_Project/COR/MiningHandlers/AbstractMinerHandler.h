@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
+#include "Components/ActorComponent.h"
 
 #include "../Requests/MiningRequest.h"
 
@@ -13,22 +13,30 @@
  * 
  */
 UCLASS(Abstract)
-class MCR_PROJECT_API UAbstractMinerHandler : public UObject
+class MCR_PROJECT_API UAbstractMinerHandler : public UActorComponent
 {
 	GENERATED_BODY()
 
 public:
 	UAbstractMinerHandler();
 
+	// void SetOwner(TObjectPtr<class AMinerCharacter> _Owner);
+	
+	// TObjectPtr<class AMinerCharacter> GetOwner() const;
+
 	/**
 	 * Set the next handler of a specified handler
-	 * @param handler
+	 * @param Handler
 	 * @return return a handler so we can use it like this handlerA->setNext
 	 * (handlerB)->setNext(handlerC);
 	 */
-	UAbstractMinerHandler *setNext(UAbstractMinerHandler *handler);
-	virtual void handle(UMiningRequest *request);
+	UAbstractMinerHandler *SetNext(UAbstractMinerHandler *Handler);
+	virtual void Handle(UMiningRequest *Request);
+	virtual void ForwardRequest(UMiningRequest *Request);
 	~UAbstractMinerHandler() = default;
-private:
+	
+protected:
 	UAbstractMinerHandler* next_handler = nullptr;
+
+	// TObjectPtr<class AMinerCharacter> Owner;
 };

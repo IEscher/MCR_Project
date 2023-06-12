@@ -3,10 +3,9 @@
 
 #include "MakeToolsHandler.h"
 
-void UMakeToolsHandler::handle(UProcessingRequest* request)
+void UMakeToolsHandler::Handle(UProcessingRequest* Request)
 {
 	//TODO Sell material depending on value & Quantity (ig)
-	std::cout << "Sell handler " << std::endl;
 	//Call next handler
-	Super::handle(request);
+	Super::Handle(Request);
 }

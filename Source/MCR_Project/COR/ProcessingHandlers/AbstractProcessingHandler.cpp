@@ -5,13 +5,26 @@
 
 UAbstractProcessingHandler::UAbstractProcessingHandler() = default;
 
-UAbstractProcessingHandler *UAbstractProcessingHandler::setNext(UAbstractProcessingHandler *handler) {
-	this->next_handler = handler;
-	return handler;
+void UAbstractProcessingHandler::SetOwner(TObjectPtr<AProcessingCharacter> _Owner)
+{
+	if (_Owner)
+	{
+		Owner = _Owner;
+	}
 }
 
-void UAbstractProcessingHandler::handle(UProcessingRequest *request) {
+TObjectPtr<AProcessingCharacter> UAbstractProcessingHandler::GetOwner() const
+{
+	return Owner;
+}
+
+UAbstractProcessingHandler *UAbstractProcessingHandler::SetNext(UAbstractProcessingHandler *Handler) {
+	this->next_handler = Handler;
+	return Handler;
+}
+
+void UAbstractProcessingHandler::Handle(UProcessingRequest *Request) {
 	if (this->next_handler) {
-		return this->next_handler->handle(request);
+		return this->next_handler->Handle(Request);
 	}
 }

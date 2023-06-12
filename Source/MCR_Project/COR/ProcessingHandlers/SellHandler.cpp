@@ -3,9 +3,8 @@
 
 #include "SellHandler.h"
 
-void USellHandler::handle(UProcessingRequest *r) {
+void USellHandler::Handle(UProcessingRequest *Request) {
 	//TODO Sell material depending on value & Quantity (ig)
-	std::cout << "Sell handler " << std::endl;
 	//Call next handler
-	Super::handle(r);
+	Super::Handle(Request);
 }

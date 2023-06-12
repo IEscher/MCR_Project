@@ -18,5 +18,5 @@ class MCR_PROJECT_API USortingHandler : public UAbstractProcessingHandler
 	
 public:
 	USortingHandler() = default;
-	void handle(UProcessingRequest *request) override;
+	void Handle(UProcessingRequest *Request) override;
 };

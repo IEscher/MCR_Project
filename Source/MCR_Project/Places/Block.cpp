@@ -35,9 +35,16 @@ void ABlock::Mine(const ATool& Tool)
 		// if true
 		// notify gamemode to delete in array
 		AMineGameMode* GameMode = Cast<AMineGameMode>(GetWorld()->GetAuthGameMode());
-		GameMode->RemoveBlockFromList(*this);
+		if (!GameMode)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Block: GM no found"));
+			return;
+		}
+		GameMode->RemovePlaceFromList(*this);
 		// destroy object
 		Destroy();
+		
+		GameMode->GiveNextBlock();
 	}
 	// else
 	// Handler

@@ -3,9 +3,9 @@
 
 #include "MeltingHandler.h"
 
-void UMeltingHandler::handle(UProcessingRequest *r) {
+void UMeltingHandler::Handle(UProcessingRequest *Request) {
 
 	//TODO If material can be melted, melt it
 	//Call next handler
-	Super::handle(r);
+	Super::Handle(Request);
 }

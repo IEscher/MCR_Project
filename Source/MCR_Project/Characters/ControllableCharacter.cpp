@@ -11,6 +11,11 @@ AControllableCharacter::AControllableCharacter()
 
 }
 
+bool AControllableCharacter::IsFirstOfChain()
+{
+	return bIsFirstOfChain;
+}
+
 // Called when the game starts or when spawned
 void AControllableCharacter::BeginPlay()
 {
@@ -18,7 +23,7 @@ void AControllableCharacter::BeginPlay()
 	
 }
 
-void AControllableCharacter::ArrivedToPlace(AVisitablePlace* Place)
+void AControllableCharacter::ArrivedToPlace(UMiningRequest* Request, AVisitablePlace* Place, bool bIsSuccessful)
 {
 	// UE_LOG(LogTemp, Warning, TEXT("ControllableCharacter arrived to place"));
 }

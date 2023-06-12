@@ -17,21 +17,30 @@ class MCR_PROJECT_API AMineGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 
+protected:
+	virtual void BeginPlay() override;
+
 public:
-	ABlock* FindClosestBlock(const FVector StartingLocation) const;
+	UFUNCTION(BlueprintCallable)
+	ABlock* FindClosestBlock(const FVector& StartingLocation) const; // TODO GM give this as request
 
-	void RemoveBlockFromList(const ABlock& Block);
+	void RemovePlaceFromList(const AVisitablePlace& Place);
 
-// protected:
-// 	virtual void BeginPlay() override;
+	// TObjectPtr<UMiningRequest> FckOffGiveMeAMiningRequest(const FVector& ActorLocation);
+
+	UFUNCTION(BlueprintCallable)
+	void GiveNextBlock();
+
+	UFUNCTION(BlueprintCallable)
+	void GiveNextProcessing();
 
 private:
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	TArray<AVisitablePlace*> Places;
 	
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	TArray<AControllableCharacter*> Characters;
 
 	UFUNCTION(BlueprintCallable)
 	void FindAllActors();
+
+	void GiveRequests();
 };

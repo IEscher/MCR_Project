@@ -17,5 +17,5 @@ class MCR_PROJECT_API UMeltingHandler : public UAbstractProcessingHandler
 	
 public:
 	UMeltingHandler() = default;
-	void handle(UProcessingRequest *request) override;
+	void Handle(UProcessingRequest *Request) override;
 };

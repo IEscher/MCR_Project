@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Request.h"
+// #include "MCR_Project/Places/Block.h"
 #include "MiningRequest.generated.h"
 
 /**
@@ -17,4 +18,12 @@ class MCR_PROJECT_API UMiningRequest : public URequest
 public:
 	UMiningRequest();
 	~UMiningRequest();
+
+	void SetBlock(TObjectPtr<class ABlock> _Block);
+
+	UFUNCTION(BlueprintCallable)
+	ABlock* GetBlock();
+
+private:
+	TObjectPtr<class ABlock> Block;
 };
