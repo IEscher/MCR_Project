@@ -32,6 +32,7 @@ public:
 	 */
 	UAbstractProcessingHandler *SetNext(UAbstractProcessingHandler *Handler);
 	virtual void Handle(UProcessingRequest *Request);
+	void ForwardRequest(UProcessingRequest *Request);
 	~UAbstractProcessingHandler() = default;
 	
 protected:

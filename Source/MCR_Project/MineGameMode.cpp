@@ -4,6 +4,7 @@
 #include "MineGameMode.h"
 
 #include "Characters/MinerCharacter.h"
+#include "Characters/ProcessingCharacter.h"
 #include "COR/Requests/MiningRequest.h"
 #include "COR/Requests/ProcessingRequest.h"
 #include "Kismet/GameplayStatics.h"
@@ -22,7 +23,7 @@ ABlock* AMineGameMode::FindClosestBlock(const FVector& StartingLocation) const
 	ABlock* Result = nullptr;
 	if (!Places.IsEmpty())
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Places array length = %d"), Places.Num());
+		// UE_LOG(LogTemp, Warning, TEXT("Places array length = %d"), Places.Num());
 		float MinDistance = TNumericLimits<float>::Max();
 		float Distance;
 		for (AVisitablePlace* p : Places)
@@ -39,6 +40,32 @@ ABlock* AMineGameMode::FindClosestBlock(const FVector& StartingLocation) const
 	else
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Game mode: Can't find Blocks, Places is empty"));
+	}
+	return Result;
+}
+
+AResource* AMineGameMode::FindClosestResource(const FVector& StartingLocation) const
+{
+	AResource* Result = nullptr;
+	if (!Places.IsEmpty())
+	{
+		// UE_LOG(LogTemp, Warning, TEXT("Places array length = %d"), Places.Num());
+		float MinDistance = TNumericLimits<float>::Max();
+		float Distance;
+		for (AVisitablePlace* p : Places)
+		{
+			if (!p) continue;
+			AResource* Ressource = Cast<AResource>(p);
+			if (Ressource && MinDistance > (Distance = FVector::Distance(StartingLocation, Ressource->GetActorLocation())))
+			{
+				Result = Ressource;
+				MinDistance = Distance;
+			}
+		}
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Game mode: Can't find Resources, Places is empty"));
 	}
 	return Result;
 }
@@ -78,13 +105,35 @@ void AMineGameMode::RemovePlaceFromList(const AVisitablePlace& Place)
 // 	return Request;
 // }
 
+TObjectPtr<UProcessingRequest> AMineGameMode::AskForProcessingRequest(const FVector& ActorLocation)
+{
+	FindAllActors();
+	
+	// Create new Request
+	TObjectPtr<UProcessingRequest> Request = NewObject<UProcessingRequest>();
+	if (!Request)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Game mode: Unable to create Request"));
+		return nullptr;
+	}
+	AResource* ClosestResource = FindClosestResource(ActorLocation);
+	if (!ClosestResource)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Game mode: No Blocks left"));
+		return nullptr;
+	}
+	Request->SetResource(ClosestResource);
+
+	return Request;
+}
+
 void AMineGameMode::GiveNextBlock()
 {
 	FindAllActors();
 	
 	if (Characters.IsEmpty())
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Game mode: No Characters found"));
+		UE_LOG(LogTemp, Warning, TEXT("Game mode: GiveNextBlock: No Characters found"));
 		return;
 	}
 	
@@ -92,30 +141,30 @@ void AMineGameMode::GiveNextBlock()
 	{
 		if (!Characters.IsValidIndex(i))
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Game mode: invalid index"));
+			UE_LOG(LogTemp, Warning, TEXT("Game mode: GiveNextBlock: invalid index"));
 			return;
 		}
 		ACharacter* Character = Characters[i];
 		if (!Character)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Game mode: invalid character"));
+			UE_LOG(LogTemp, Warning, TEXT("Game mode: GiveNextBlock: invalid character"));
 			return;
 		}
 		AMinerCharacter* Miner = Cast<AMinerCharacter>(Character);
 		if (Miner && Miner->IsFirstOfChain()) // If it is the first Miner of a chain
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Found: %s"), *Character->GetName());
+			// UE_LOG(LogTemp, Warning, TEXT("Found: %s"), *Character->GetName());
 			// Create new Request
 			TObjectPtr<UMiningRequest> Request = NewObject<UMiningRequest>();
 			if (!Request)
 			{
-				UE_LOG(LogTemp, Warning, TEXT("Game mode: Unable to create Request"));
+				UE_LOG(LogTemp, Warning, TEXT("Game mode: GiveNextBlock: Unable to create Request"));
 				return;
 			}
 			ABlock* ClosestBlock = FindClosestBlock(Miner->GetActorLocation());
 			if (!ClosestBlock)
 			{
-				UE_LOG(LogTemp, Warning, TEXT("Game mode: No Blocks left"));
+				UE_LOG(LogTemp, Warning, TEXT("Game mode: GiveNextBlock: No Blocks left"));
 				return;
 			}
 			Request->SetBlock(ClosestBlock);
@@ -123,7 +172,7 @@ void AMineGameMode::GiveNextBlock()
 			// Give the Request
 			if (!Miner->GetHandler() || !IsValid(Miner->GetHandler()))
 			{
-				UE_LOG(LogTemp, Warning, TEXT("Game Mode: Miner has no Handler"));
+				UE_LOG(LogTemp, Warning, TEXT("Game Mode: GiveNextBlock: Miner has no Handler"));
 				return;
 			}
 			
@@ -132,8 +181,58 @@ void AMineGameMode::GiveNextBlock()
 	}
 }
 
-void AMineGameMode::GiveNextProcessing()
+void AMineGameMode::GiveProcessing()
 {
+	FindAllActors();
+	
+	if (Characters.IsEmpty())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Game mode: GiveProcessing: No Characters found"));
+		return;
+	}
+	
+	for (size_t i = 0; i < Characters.Num(); ++i)
+	{
+		if (!Characters.IsValidIndex(i))
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Game mode: GiveProcessing: invalid index"));
+			return;
+		}
+		ACharacter* Character = Characters[i];
+		if (!Character)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Game mode: GiveProcessing: invalid character"));
+			return;
+		}
+		AProcessingCharacter* Processer = Cast<AProcessingCharacter>(Character);
+		if (Processer && Processer->IsFirstOfChain() && !Processer->IsOccupied()) // If it is the first Miner of a chain
+			{
+			// UE_LOG(LogTemp, Warning, TEXT("Found: %s"), *Character->GetName());
+			// Create new Request
+			TObjectPtr<UProcessingRequest> Request = NewObject<UProcessingRequest>();
+			if (!Request)
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Game mode: GiveProcessing: Unable to create Request"));
+				return;
+			}
+			AResource* ClosestResource = FindClosestResource(Processer->GetActorLocation());
+			if (!ClosestResource)
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Game mode: GiveProcessing: No Resources left"));
+				return;
+			}
+			Request->SetResource(ClosestResource);
+	
+			// Give the Request
+			if (!Processer->GetHandler() || !IsValid(Processer->GetHandler()))
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Game Mode: GiveProcessing: Miner has no Handler"));
+				return;
+			}
+			
+			Processer->GetHandler()->UAbstractProcessingHandler::Handle(Request);
+			}
+	}
 }
 
 void AMineGameMode::FindAllActors()

@@ -6,7 +6,7 @@
 #include "Engine/StaticMeshActor.h"
 #include "../../Tools/Tool.h"
 #include "../VisitablePlace.h"
-#include "../Resource.h"
+#include "../Resources/Resource.h"
 
 #include "Block.generated.h"
 
@@ -24,12 +24,14 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "COR", meta = (AllowPrivateAccess = "true"))
-	TSubclassOf<AResource> ResourceTypeCarried;
+	// UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "COR", meta = (AllowPrivateAccess = "true"))
+	// TSubclassOf<AResource> ResourceTypeCarried;
 	
-	UFUNCTION(BlueprintNativeEvent)
-	AResource* SpawnResource();
-	AResource* SpawnResource_Implementation();
+	// UFUNCTION(BlueprintNativeEvent)
+	// AResource* SpawnResource();
+	// AResource* SpawnResource_Implementation();
+	
+	virtual AResource* SpawnResource();
 
 public:
 	// Called every frame
@@ -37,6 +39,10 @@ public:
 
 	void Mine(const ATool& Tool);
 
-	virtual bool bCouldMine(const ATool& Tool) const;
+	bool bCouldMine(const ATool& Tool) const;
+
+private:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	uint8 RequiredMiningLevel;
 
 };

@@ -3,7 +3,19 @@
 
 #include "DirtBlock.h"
 
-bool ADirtBlock::bCouldMine(const ATool& Tool) const
+#include "MCR_Project/Places/Resources/DirtResource.h"
+
+// bool ADirtBlock::bCouldMine(const ATool& Tool) const
+// {
+// 	return true;
+// }
+
+// AResource* ADirtBlock::SpawnResource()
+// {
+// 	return GetWorld()->SpawnActor<ADirtResource>();
+// }
+ADirtResource* ADirtBlock::SpawnResource_Implementation()
 {
-	return true;
+	UE_LOG(LogTemp, Warning, TEXT("ABlock: SpawnRessource, no implementation found"));
+	return nullptr;
 }

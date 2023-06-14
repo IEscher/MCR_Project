@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Block.h"
+#include "MCR_Project/Places/Resources/DirtResource.h"
 #include "DirtBlock.generated.h"
 
 /**
@@ -14,7 +15,14 @@ class MCR_PROJECT_API ADirtBlock : public ABlock
 {
 	GENERATED_BODY()
 
+protected:
+	
+	UFUNCTION(BlueprintNativeEvent)
+	ADirtResource* SpawnResource();
+	ADirtResource* SpawnResource_Implementation();
+// 	AResource* SpawnResource() override;
+
 public:
-	bool bCouldMine(const ATool& Tool) const override;
+	// bool bCouldMine(const ATool& Tool) const override;
 	
 };

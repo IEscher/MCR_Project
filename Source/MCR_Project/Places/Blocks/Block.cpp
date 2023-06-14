@@ -4,6 +4,7 @@
 #include "Block.h"
 
 #include "../../MineGameMode.h"
+#include "../../Tools/PickaxeTool.h"
 
 // Sets default values
 ABlock::ABlock()
@@ -20,11 +21,17 @@ void ABlock::BeginPlay()
 	
 }
 
-AResource* ABlock::SpawnResource_Implementation()
-{
-	UE_LOG(LogTemp, Warning, TEXT("ABlock: SpawnRessource, no implementation found"));
-	return nullptr;
-}
+// AResource* ABlock::SpawnResource_Implementation()
+// {
+// 	UE_LOG(LogTemp, Warning, TEXT("ABlock: SpawnRessource, no implementation found"));
+// 	return nullptr;
+// }
+
+// AResource* ABlock::SpawnResource()
+// {
+// 	UE_LOG(LogTemp, Warning, TEXT("ABlock: SpawnRessource, no implementation found"));
+// 	return nullptr;
+// }
 
 // Called every frame
 void ABlock::Tick(float DeltaTime)
@@ -48,18 +55,28 @@ void ABlock::Mine(const ATool& Tool)
 		}
 		GameMode->RemovePlaceFromList(*this);
 
+		// // Create the resource
+		// if (ResourceTypeCarried)
+		// {
+		// 	AResource* ResourceActor = SpawnResource();
+		//
+		// 	// Forward the request
+		// }
+		// else
+		// {
+		// 	UE_LOG(LogTemp, Warning, TEXT("AProcessingCharacter : associated handler class is not set"));
+		// }
+
 		// Create the resource
-		if (ResourceTypeCarried)
+		AResource* ResourceActor = SpawnResource();
+		if (ResourceActor)
 		{
-			AResource* ResourceActor = SpawnResource();
-			// TObjectPtr<ARessource> NewRessource = NewObject<ARessource>(this, RessourceTypeCarried);
-			// TObjectPtr<ARessource> NewRessource = GetWorld()->SpawnActor(RessourceTypeCarried);
-		
 			// Forward the request
+			
 		}
 		else
 		{
-			UE_LOG(LogTemp, Warning, TEXT("AProcessingCharacter : associated handler class is not set"));
+			UE_LOG(LogTemp, Warning, TEXT("Block : ResourceActor did not spawn correctly"));
 		}
 
 		
@@ -74,7 +91,19 @@ void ABlock::Mine(const ATool& Tool)
 
 bool ABlock::bCouldMine(const ATool& Tool) const
 {
-	UE_LOG(LogTemp, Warning, TEXT("An abstract block can not be mined"));
+	// UE_LOG(LogTemp, Warning, TEXT("An abstract block can not be mined"));
+	// return false;
+
+	// auto ToolPtr = Ptr<ATool>(Tool);
+	const APickaxeTool* Pick = Cast<const APickaxeTool>(&Tool);
+	if(Pick)
+		UE_LOG(LogTemp, Warning, TEXT("Pick found, getML %d >= requiredML %d"), Pick->GetMiningLevel(), RequiredMiningLevel);
+	if (Pick && Pick->GetMiningLevel() >= RequiredMiningLevel)
+	{
+		return true;
+	}
+
+	// const APickaxeTool& Pick = Tool;
 	return false;
 }
 

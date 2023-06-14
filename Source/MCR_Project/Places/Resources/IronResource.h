@@ -3,14 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "VisitablePlace.h"
-#include "Resource.generated.h"
+#include "Resource.h"
+#include "IronResource.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class MCR_PROJECT_API AResource : public AVisitablePlace
+class MCR_PROJECT_API AIronResource : public AResource
 {
 	GENERATED_BODY()
 	

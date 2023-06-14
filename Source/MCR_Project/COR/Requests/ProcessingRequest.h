@@ -18,8 +18,8 @@ public:
 	UProcessingRequest();
 	~UProcessingRequest();
 
-	void SetResource(::TObjectPtr<class AResource> _Resource);
-
+	void SetResource(TObjectPtr<class AResource> _Resource);
+	
 	UFUNCTION(BlueprintCallable)
 	class AResource* GetResource();
 
