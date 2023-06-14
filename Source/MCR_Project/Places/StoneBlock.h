@@ -18,7 +18,7 @@ public:
 	bool bCouldMine(const ATool& Tool) const override;
 
 private:
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "COR", meta = (AllowPrivateAccess = "true"))
 	uint8 RequiredMiningLevel;
 	
 };

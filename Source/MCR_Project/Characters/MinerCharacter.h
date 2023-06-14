@@ -44,8 +44,8 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	// UFUNCTION(BlueprintCallable)
-	// void GoToBlock(UMiningRequest* Request);
+	UFUNCTION(BlueprintImplementableEvent)
+	void GoToBlockFromRequest(UMiningRequest* Request);
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void EquipTool();

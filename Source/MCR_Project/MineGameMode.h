@@ -26,13 +26,8 @@ public:
 
 	void RemovePlaceFromList(const AVisitablePlace& Place);
 
-	// TObjectPtr<UMiningRequest> FckOffGiveMeAMiningRequest(const FVector& ActorLocation);
-
 	UFUNCTION(BlueprintCallable)
 	void GiveNextBlock();
-
-	UFUNCTION(BlueprintCallable)
-	void GiveNextProcessing();
 
 private:
 	TArray<AVisitablePlace*> Places;

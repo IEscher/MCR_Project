@@ -28,10 +28,6 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UFUNCTION(BlueprintImplementableEvent)
-	void GoToBlockFromRequest(UMiningRequest* Request);
-
-	// UFUNCTION(BlueprintPure)
 	virtual void ArrivedToPlace(UMiningRequest* Request, AVisitablePlace* Place, bool bIsSuccessful);
 
 public:	

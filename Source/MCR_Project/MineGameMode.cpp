@@ -5,16 +5,13 @@
 
 #include "Characters/MinerCharacter.h"
 #include "COR/Requests/MiningRequest.h"
-#include "COR/Requests/ProcessingRequest.h"
 #include "Kismet/GameplayStatics.h"
 
 void AMineGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// FindAllActors();
 	GiveRequests();
-	// The firsts Characters asks for a Request
 }
 
 ABlock* AMineGameMode::FindClosestBlock(const FVector& StartingLocation) const
@@ -55,28 +52,6 @@ void AMineGameMode::RemovePlaceFromList(const AVisitablePlace& Place)
 		UE_LOG(LogTemp, Warning, TEXT("Places array length = %d"), Places.Num());
 	} 
 }
-
-// TObjectPtr<UMiningRequest> AMineGameMode::FckOffGiveMeAMiningRequest(const FVector& ActorLocation)
-// {
-// 	FindAllActors();
-// 	
-// 	// Create new Request
-// 	TObjectPtr<UMiningRequest> Request = NewObject<UMiningRequest>();
-// 	if (!Request)
-// 	{
-// 		UE_LOG(LogTemp, Warning, TEXT("Game mode: Unable to create Request"));
-// 		return nullptr;
-// 	}
-// 	ABlock* ClosestBlock = FindClosestBlock(ActorLocation);
-// 	if (!ClosestBlock)
-// 	{
-// 		UE_LOG(LogTemp, Warning, TEXT("Game mode: No Blocks left"));
-// 		return nullptr;
-// 	}
-// 	Request->SetBlock(ClosestBlock);
-//
-// 	return Request;
-// }
 
 void AMineGameMode::GiveNextBlock()
 {
@@ -130,10 +105,6 @@ void AMineGameMode::GiveNextBlock()
 			Miner->GetHandler()->UMinerHandler::Handle(Request);
 		}
 	}
-}
-
-void AMineGameMode::GiveNextProcessing()
-{
 }
 
 void AMineGameMode::FindAllActors()
@@ -190,6 +161,6 @@ void AMineGameMode::FindAllActors()
 void AMineGameMode::GiveRequests()
 {
 	GiveNextBlock();
-	
-	// TODO GiveNextProcessing();
+
+	// Place for other chain of responsability
 }
