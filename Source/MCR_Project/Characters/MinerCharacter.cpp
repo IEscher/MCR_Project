@@ -23,6 +23,7 @@ void AMinerCharacter::BeginPlay()
 	EquipTool();
 
 	InstantiateCOR();
+	// TObjectPtr<ATool> siejfn = GetWorld()->SpawnActor<ToolComponent->StaticClass()>();
 
 	// HandleBlock();
 	
@@ -59,7 +60,16 @@ void AMinerCharacter::ArrivedToPlace(UMiningRequest* Request, AVisitablePlace* P
 	Super::ArrivedToPlace(Request, Place, bIsSuccessful);
 	UE_LOG(LogTemp, Warning, TEXT("AMinerCharacter arrived to place"));
 
-	if(!Request) return;
+	if(!Request)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("AMinerCharacter: Request disapeard"));
+		AMineGameMode* GameMode = Cast<AMineGameMode>(GetWorld()->GetAuthGameMode());
+		if (GameMode)
+		{
+			GameMode->GiveNextBlock();
+		}
+		return;
+	}
 	if(!Place || !bIsSuccessful) // If not able to reach the place
 	{
 		Handler->ForwardRequest(Request);
