@@ -17,4 +17,12 @@ class MCR_PROJECT_API UProcessingRequest : public URequest
 public:
 	UProcessingRequest();
 	~UProcessingRequest();
+
+	void SetResource(::TObjectPtr<class AResource> _Resource);
+
+	UFUNCTION(BlueprintCallable)
+	class AResource* GetResource();
+
+private:
+	TObjectPtr<class AResource> Resource;
 };

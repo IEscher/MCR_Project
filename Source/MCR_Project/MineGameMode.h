@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
-#include "Places/Block.h"
+#include "Places/Blocks/Block.h"
 #include "Characters/ControllableCharacter.h"
 
 #include "MineGameMode.generated.h"
