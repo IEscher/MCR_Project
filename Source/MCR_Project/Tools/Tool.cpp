@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 
 #include "Tool.h"
 
@@ -27,4 +25,3 @@ void ATool::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 }
-

@@ -10,7 +10,7 @@
 #include "AbstractMinerHandler.generated.h"
 
 /**
- * 
+ * @authors Ian Escher, Tobie Praz, Jarod Streckeisen
  */
 UCLASS(Abstract)
 class MCR_PROJECT_API UAbstractMinerHandler : public UActorComponent
@@ -19,24 +19,27 @@ class MCR_PROJECT_API UAbstractMinerHandler : public UActorComponent
 
 public:
 	UAbstractMinerHandler();
-
-	// void SetOwner(TObjectPtr<class AMinerCharacter> _Owner);
+	~UAbstractMinerHandler() = default;
 	
-	// TObjectPtr<class AMinerCharacter> GetOwner() const;
-
 	/**
-	 * Set the next handler of a specified handler
+	 * @brief Set the next handler of a specified handler
 	 * @param Handler
-	 * @return return a handler so we can use it like this handlerA->setNext
-	 * (handlerB)->setNext(handlerC);
+	 * @return return a handler so we can use it like this handlerA->setNext(handlerB)->setNext(handlerC);
 	 */
 	UAbstractMinerHandler *SetNext(UAbstractMinerHandler *Handler);
+
+	/**
+	 * @brief Handle a mining request
+	 * @param Request
+	 */
 	virtual void Handle(UMiningRequest *Request);
+
+	/**
+	 * @brief Forward a mining request to the next handler
+	 * @param Request
+	 */
 	virtual void ForwardRequest(UMiningRequest *Request);
-	~UAbstractMinerHandler() = default;
 	
 protected:
 	UAbstractMinerHandler* next_handler = nullptr;
-
-	// TObjectPtr<class AMinerCharacter> Owner;
 };

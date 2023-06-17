@@ -128,10 +128,10 @@ void AMineGameMode::FindAllActors()
 		}
 	}
 
-	for (AVisitablePlace* p : Places)
-	{
-		UE_LOG(LogTemp, Log, TEXT("Found: %s"), *p->GetName());
-	}
+	// for (AVisitablePlace* p : Places)
+	// {
+	// 	UE_LOG(LogTemp, Log, TEXT("Found: %s"), *p->GetName());
+	// }
 
 	FoundActors.Empty();
 	Characters.Empty();
@@ -152,15 +152,15 @@ void AMineGameMode::FindAllActors()
 		}
 	}
 
-	for (AControllableCharacter* p : Characters)
-	{
-		UE_LOG(LogTemp, Log, TEXT("Found: %s"), *p->GetName());
-	}
+	// for (AControllableCharacter* p : Characters)
+	// {
+	// 	UE_LOG(LogTemp, Log, TEXT("Found: %s"), *p->GetName());
+	// }
 }
 
 void AMineGameMode::GiveRequests()
 {
 	GiveNextBlock();
 
-	// Place for other chain of responsability
+	// Place for other chains of responsibility
 }

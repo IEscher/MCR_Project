@@ -7,8 +7,7 @@
 #include "Request.generated.h"
 
 /**
-	TODO fil that class with what you need
-	TODO CHECK IF THIS IS USELESS OR NOT
+ * @authors Ian Escher, Tobie Praz, Jarod Streckeisen
  */
 UCLASS()
 class MCR_PROJECT_API URequest : public UObject

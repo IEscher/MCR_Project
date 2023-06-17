@@ -1,14 +1,11 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
 #include "Request.h"
-// #include "MCR_Project/Places/Block.h"
 #include "MiningRequest.generated.h"
 
 /**
- * 
+ * @authors Ian Escher, Tobie Praz, Jarod Streckeisen
  */
 UCLASS()
 class MCR_PROJECT_API UMiningRequest : public URequest
@@ -18,9 +15,17 @@ class MCR_PROJECT_API UMiningRequest : public URequest
 public:
 	UMiningRequest();
 	~UMiningRequest();
-
+	
+	/**
+	 * @brief Set the block to mine
+	 * @param _Block
+	 */
 	void SetBlock(TObjectPtr<class ABlock> _Block);
 
+	/**
+	 * @brief Get the block to mine
+	 * @return the block to mine
+	 */
 	UFUNCTION(BlueprintCallable)
 	ABlock* GetBlock();
 

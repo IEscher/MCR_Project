@@ -6,7 +6,9 @@
 #include "Engine/StaticMeshActor.h"
 #include "Tool.generated.h"
 
-
+/**
+ * @authors Ian Escher, Tobie Praz, Jarod Streckeisen
+ */
 UCLASS( Abstract )
 class MCR_PROJECT_API ATool : public AStaticMeshActor
 {
@@ -23,5 +25,4 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-		
 };

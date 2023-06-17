@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 
 #include "MinerCharacter.h"
 
@@ -12,8 +10,7 @@ AMinerCharacter::AMinerCharacter()
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	// Handler = NewObject<UMinerHandler>();
-	Handler = CreateDefaultSubobject<UMinerHandler>(TEXT("Haandler"));
+	Handler = CreateDefaultSubobject<UMinerHandler>(TEXT("Handler"));
 }
 
 // Called when the game starts or when spawned
@@ -23,37 +20,19 @@ void AMinerCharacter::BeginPlay()
 	EquipTool();
 
 	InstantiateCOR();
-	// TObjectPtr<ATool> siejfn = GetWorld()->SpawnActor<ToolComponent->StaticClass()>();
-
-	// HandleBlock();
-	
-	// if (Handler && bIsFirstOfChain)
-	// {
-	// 	AMineGameMode* GameMode = Cast<AMineGameMode>(GetWorld()->GetAuthGameMode());
-	// 	if (GameMode)
-	// 	{
-	// 		TObjectPtr<UMiningRequest> Request = GameMode->FckOffGiveMeAMiningRequest(GetActorLocation());
-	// 		// Give the Request
-	// 		if (!Request || !Request->GetBlock())
-	// 		{
-	// 			UE_LOG(LogTemp, Warning, TEXT("Miner Character: GM gave me a shitty request"));
-	// 			return;
-	// 		}
-	// 		Handler->UMinerHandler::Handle(Request);
-	// 	}
-	// }
 }
 
-// void AMinerCharacter::GoToBlock(UMiningRequest* Request)
-// {
-// 	if (!Request) return;
-// 	
-// 	AMineGameMode* GameMode = Cast<AMineGameMode>(GetWorld()->GetAuthGameMode());
-// 	if (GameMode)
-// 	{
-// 		GoToBlockFromRequest(Request);
-// 	}
-// }
+// Called every frame
+void AMinerCharacter::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+}
+
+// Called to bind functionality to input
+void AMinerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+{
+	Super::SetupPlayerInputComponent(PlayerInputComponent);
+}
 
 void AMinerCharacter::ArrivedToPlace(UMiningRequest* Request, AVisitablePlace* Place, bool bIsSuccessful)
 {
@@ -89,8 +68,6 @@ void AMinerCharacter::ArrivedToPlace(UMiningRequest* Request, AVisitablePlace* P
 	{
 		Handler->ForwardRequest(Request);
 	}
-
-	// TODO Return to OG position
 }
 
 ATool* AMinerCharacter::GetToolActor_Implementation()
@@ -102,18 +79,6 @@ ATool* AMinerCharacter::GetToolActor_Implementation()
 TObjectPtr<UMinerHandler> AMinerCharacter::GetHandler()
 {
 	return Handler;
-}
-
-// Called every frame
-void AMinerCharacter::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-}
-
-// Called to bind functionality to input
-void AMinerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
 
 void AMinerCharacter::InstantiateCOR()

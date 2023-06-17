@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -9,7 +7,7 @@
 #include "MinerHandler.generated.h"
 
 /**
- * 
+ * @authors Ian Escher, Tobie Praz, Jarod Streckeisen
  */
 UCLASS()
 class MCR_PROJECT_API UMinerHandler : public UAbstractMinerHandler
@@ -18,6 +16,16 @@ class MCR_PROJECT_API UMinerHandler : public UAbstractMinerHandler
 	
 public:
 	UMinerHandler() = default;
+	
+	/*
+	 * @brief Handle a mining request
+	 * @param Request
+	 */
 	void Handle(UMiningRequest *Request) override;
+
+	/*
+	 * @brief Forward a mining request to the next handler
+	 * @param Request
+	 */
 	void ForwardRequest(UMiningRequest *Request) override;
 };
